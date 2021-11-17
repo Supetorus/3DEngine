@@ -1,7 +1,8 @@
 #pragma once
 #include "Framework/System.h"
-#include "Texture.h"
 #include "Math/Transform.h"
+
+#include <glad/glad.h>
 #include <SDL.h>
 #include <string>
 
@@ -21,9 +22,8 @@ namespace nc
 		int GetWidth() { return width; }
 		int GetHeight() { return height; }
 
-		friend class Texture; // makes the texture class a friend of renderer, so texture has access to the renderer declared in private.
-
 	private:
+		SDL_GLContext context;
 		SDL_Renderer* renderer{ nullptr };
 		SDL_Window* window{ nullptr };
 
