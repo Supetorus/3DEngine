@@ -106,6 +106,18 @@ int main(int argc, char** argv)
 
 	glUseProgram(shaderProgram);
 
+	nc::SeedRandom(static_cast<unsigned int>(time(nullptr)));
+	nc::SetFilePath("../resources");
+
+	std::shared_ptr<nc::Program> program = engine.Get<nc::ResourceSystem>()->Get<nc::Program>("basic_program");
+	std::shared_ptr<nc::Shader> vshader = engine.Get<nc::ResourceSystem>()->Get<nc::Shader>("shaders/basic.vert", (void*)GL_VERTEX_SHADER);
+	std::shared_ptr<nc::Shader> fshader = engine.Get<nc::ResourceSystem>()->Get<nc::Shader>("shaders/basic.frag", (void*)GL_FRAGMENT_SHADER);
+
+	program->AddShader(vshader);
+	program->AddShader(fshader);
+	program->Link();
+	program->Use();
+
 	// Vertex Array
 	GLuint vao;
 	glGenVertexArrays(1, &vao);
@@ -137,6 +149,9 @@ int main(int argc, char** argv)
 
 	GLuint tintLocation = glGetUniformLocation(shaderProgram, "tint");
 	glm::vec3 tint{ 1.0f, 0.15f, 0.15f };
+
+	program->SetUniform("scale", time);
+	program->SetUniform("tint", tint);
 
 	bool quit = false;
 	while (!quit)

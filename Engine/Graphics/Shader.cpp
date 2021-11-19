@@ -5,7 +5,7 @@ namespace nc
 {
 	Shader::~Shader()
 	{
-		if (program != 0)
+		if (shader != 0)
 		{
 			// delete shader
 			glDeleteShader(shader);
