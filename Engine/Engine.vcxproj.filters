@@ -97,6 +97,9 @@
     <ClCompile Include="Graphics\Shader.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Program.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\EventSystem.h">
@@ -184,6 +187,9 @@
       <Filter>Source\Math</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Shader.h">
+      <Filter>Source\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Program.h">
       <Filter>Source\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
