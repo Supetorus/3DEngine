@@ -123,7 +123,7 @@ namespace nc
 	void Program::SetUniform(const std::string& name, GLuint value)
 	{
 		GLint uniform = GetUniform(name);
-		glUniform1i(uniform, value);
+		glUniform1ui(uniform, value);
 	}
 
 	GLint Program::GetUniform(const std::string& name)

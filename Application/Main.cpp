@@ -20,92 +20,11 @@ const GLuint indices[] =
     0, 3, 2
 };
 
-// vertex shader
-const char* vertexSource = R"(
-    #version 430 core
-
-	layout(location = 0) in vec3 position;
-    layout(location = 1)in vec3 color;
-
-	out vec3 fs_color;
-	
-	uniform float scale;
-
-    void main()
-    {
-		fs_color = color;
-        gl_Position = vec4(position * scale, 1.0);
-    }
-)";
-
-// fragment
-const char* fragmentSource = R"(
-    #version 430 core
-	in vec3 fs_color;
-
-    out vec4 outColor;
-	
-	uniform vec3 tint;
-
-    void main()
-    {
-        outColor = vec4(fs_color, 1.0) * vec4(tint, 1.0f);
-    }
-)";
-
 int main(int argc, char** argv)
 {
 	nc::Engine engine;
 	engine.Startup();
 	engine.Get<nc::Renderer>()->Create("OpenGL", 800, 600);
-
-	nc::SeedRandom(static_cast<unsigned int>(time(nullptr)));
-	nc::SetFilePath("../resources");
-
-	// set vertex shader
-	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertexSource, NULL);
-	glCompileShader(vertexShader);
-
-	GLint status;
-	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &status);
-	if (status == GL_FALSE)
-	{
-		char buffer[512];
-		glGetShaderInfoLog(vertexShader, 512, NULL, buffer);
-		std::cout << buffer;
-	}
-
-	// set fragment shader
-	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentSource, NULL);
-	glCompileShader(fragmentShader);
-
-	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &status);
-	if (status == GL_FALSE)
-	{
-		char buffer[512];
-		glGetShaderInfoLog(fragmentShader, 512, NULL, buffer);
-		std::cout << buffer;
-	}
-
-	// create shader program
-	GLuint shaderProgram = glCreateProgram();
-	glAttachShader(shaderProgram, vertexShader);
-	glAttachShader(shaderProgram, fragmentShader);
-
-	glLinkProgram(shaderProgram);
-
-	glGetShaderiv(shaderProgram, GL_LINK_STATUS, &status);
-	if (status == GL_FALSE)
-	{
-		char buffer[512];
-		glGetShaderInfoLog(shaderProgram, 512, NULL, buffer);
-		std::cout << buffer;
-	}
-
-	glUseProgram(shaderProgram);
-
 	nc::SeedRandom(static_cast<unsigned int>(time(nullptr)));
 	nc::SetFilePath("../resources");
 
@@ -144,13 +63,9 @@ int main(int argc, char** argv)
 	glEnableVertexAttribArray(1);
 
 	// Uniform
-	GLuint location = glGetUniformLocation(shaderProgram, "scale");
 	float time = 0;
-
-	GLuint tintLocation = glGetUniformLocation(shaderProgram, "tint");
-	glm::vec3 tint{ 1.0f, 0.15f, 0.15f };
-
 	program->SetUniform("scale", time);
+	glm::vec3 tint{ 1.0f, 1.0f, 1.0f };
 	program->SetUniform("tint", tint);
 
 	bool quit = false;
@@ -172,11 +87,10 @@ int main(int argc, char** argv)
 		}
 
 		SDL_PumpEvents();
+		engine.Update();
 
-		time += 0.001f;
-
-		glUniform1f(location, std::sin(time));
-		glUniform3fv(tintLocation, 1, &tint[0]);
+		time += engine.time.deltaTime;
+		program->SetUniform("scale", std::sin(time));
 
 		engine.Get<nc::Renderer>()->BeginFrame();
 
