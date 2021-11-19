@@ -94,6 +94,9 @@
     <ClCompile Include="..\ThirdParty\glad\src\glad.c">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Shader.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\EventSystem.h">
@@ -179,6 +182,9 @@
     </ClInclude>
     <ClInclude Include="Math\MathTypes.h">
       <Filter>Source\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Shader.h">
+      <Filter>Source\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
