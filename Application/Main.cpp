@@ -77,6 +77,13 @@ int main(int argc, char** argv)
 	glm::vec3 tint{ 1.0f, 1.0f, 1.0f };
 	program->SetUniform("tint", tint);
 
+	std::shared_ptr<nc::VertexIndexBuffer> vertexBuffer = engine.Get<nc::ResourceSystem>()->Get<nc::VertexIndexBuffer>("vertex_index_buffer");
+	vertexBuffer->CreateVertexBuffer(sizeof(vertices), 4, (void*)vertices);
+	vertexBuffer->CreateIndexBuffer(GL_UNSIGNED_INT, 6, (void*)indices);
+	vertexBuffer->SetAttribute(0, 3, 8, 0);
+	vertexBuffer->SetAttribute(1, 3, 8, 3 * sizeof(float));
+
+
 	bool quit = false;
 	while (!quit)
 	{
@@ -103,7 +110,7 @@ int main(int argc, char** argv)
 
 		engine.Get<nc::Renderer>()->BeginFrame();
 
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		vertexBuffer->Draw(GL_TRIANGLES);
 		
 		engine.Get<nc::Renderer>()->EndFrame();
 	}

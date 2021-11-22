@@ -103,6 +103,12 @@
     <ClCompile Include="Graphics\Material.cpp">
       <Filter>Source\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\VertexBuffer.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\VertexIndexBuffer.cpp">
+      <Filter>Source\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\EventSystem.h">
@@ -196,6 +202,12 @@
       <Filter>Source\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Material.h">
+      <Filter>Source\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\VertexBuffer.h">
+      <Filter>Source\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\VertexIndexBuffer.h">
       <Filter>Source\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
