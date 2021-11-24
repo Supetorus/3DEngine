@@ -4,7 +4,7 @@ namespace nc
 {
 	VertexIndexBuffer::~VertexIndexBuffer()
 	{
-		if (ibo != 0) glDeleteBuffers(indexCount, &ibo);
+		if (ibo != 0) glDeleteBuffers(1, &ibo);
 	}
 
 	bool VertexIndexBuffer::Load(const std::string& name, void* null)
@@ -19,7 +19,7 @@ namespace nc
 		this->indexType = indexType;
 		this->indexCount = indexCount;
 
-		glGenBuffers(indexCount, &ibo);
+		glGenBuffers(1, &ibo);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 		size_t indexSize = (indexType == GL_UNSIGNED_SHORT) ? sizeof(GLushort) : sizeof(GLuint);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount * indexSize, data, GL_STATIC_DRAW);
@@ -28,6 +28,6 @@ namespace nc
 	void VertexIndexBuffer::Draw(GLenum primitiveType)
 	{
 		glBindVertexArray(vao);
-		glDrawElements(primitiveType, indexCount, GL_UNSIGNED_INT, &ibo);
+		glDrawElements(primitiveType, indexCount, GL_UNSIGNED_INT, 0);
 	}
 }

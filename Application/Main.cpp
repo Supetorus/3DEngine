@@ -65,35 +65,6 @@ int main(int argc, char** argv)
 	program->Link();
 	program->Use();
 
-	// Vertex Array
-	GLuint vao;
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-
-	// Vertex Buffer
-	GLuint vbo;
-	glGenBuffers(1, &vbo);
-
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-	GLuint ebo; // element buffer object
-	glGenBuffers(1, &ebo);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-	// Position
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLubyte*)NULL);
-	glEnableVertexAttribArray(0);
-
-	// Color
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
-	glEnableVertexAttribArray(1);
-
-	// UV
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void*)(6 * sizeof(GLfloat)));
-	glEnableVertexAttribArray(2);
-
 	// Vertex Buffers
 	std::shared_ptr<nc::VertexIndexBuffer> vertexBuffer = engine.Get<nc::ResourceSystem>()->Get<nc::VertexIndexBuffer>("cube_mesh");
 	vertexBuffer->CreateVertexBuffer(sizeof(vertices), 8, (void*)vertices);
@@ -103,7 +74,7 @@ int main(int argc, char** argv)
 	vertexBuffer->SetAttribute(2, 2, 8 * sizeof(float), 6 * sizeof(float));
 
 	// Texture
-	auto texture = engine.Get<nc::ResourceSystem>()->Get<nc::Texture>("textures/llama.jpg");
+	auto texture = engine.Get<nc::ResourceSystem>()->Get<nc::Texture>("textures/llama.png");
 	texture->Bind();
 
 	texture = engine.Get<nc::ResourceSystem>()->Get<nc::Texture>("textures/rocks.bmp");
@@ -145,9 +116,9 @@ int main(int argc, char** argv)
 	//glm::vec3 tint{ 1.0f, 1.0f, 1.0f };
 	//program->SetUniform("tint", tint);
 
-	glm::mat4 view{ 1 };
+	//glm::mat4 view{ 1 };
 	//view = glm::lookAt(glm::vec3{ 0, 0, 4 }, { 0, 0, 0 }, { 0, 1, 0 });
-	program->SetUniform("view", view);
+	//program->SetUniform("view", view);
 
 	glm::vec3 translate{ 0 };
 	float angle = 0;
