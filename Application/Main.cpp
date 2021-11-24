@@ -8,16 +8,38 @@
 // vertices
 const float vertices[] =
 {
-    -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
-     0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
-     0.5f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
-    -0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f
+	// front
+	-1.0f, -1.0f,  1.0, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+	 1.0f, -1.0f,  1.0, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
+	 1.0f,  1.0f,  1.0, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+	-1.0f,  1.0f,  1.0, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+	// back
+	-1.0f, -1.0f, -1.0, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
+	 1.0f, -1.0f, -1.0, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f,
+	 1.0f,  1.0f, -1.0, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+	-1.0f,  1.0f, -1.0, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f
 };
 
 const GLuint indices[] =
 {
-    0, 2, 1,
-    0, 3, 2
+	// front
+		0, 1, 2,
+		2, 3, 0,
+		// right
+		1, 5, 6,
+		6, 2, 1,
+		// back
+		7, 6, 5,
+		5, 4, 7,
+		// left
+		4, 0, 3,
+		3, 7, 4,
+		// bottom
+		4, 5, 1,
+		1, 0, 4,
+		// top
+		3, 2, 6,
+		6, 7, 3
 };
 
 int main(int argc, char** argv)
@@ -61,7 +83,7 @@ int main(int argc, char** argv)
 	// Color
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(1);
-	
+
 	// UV
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void*)(6 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(2);
@@ -83,6 +105,12 @@ int main(int argc, char** argv)
 	vertexBuffer->SetAttribute(0, 3, 8, 0);
 	vertexBuffer->SetAttribute(1, 3, 8, 3 * sizeof(float));
 
+	glm::mat4 view{ 1 };
+	//view = glm::lookAt(glm::vec3{ 0, 0, 4 }, { 0, 0, 0 }, { 0, 1, 0 });
+	program->SetUniform("view", view);
+
+	glm::vec3 translate{ 0 };
+	float angle = 0;
 
 	bool quit = false;
 	while (!quit)
@@ -106,12 +134,37 @@ int main(int argc, char** argv)
 		engine.Update();
 
 		time += engine.time.deltaTime;
-		program->SetUniform("scale", std::sin(time));
+		program->SetUniform("scale", 1.0f);
+
+		if (engine.Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_A) == nc::InputSystem::eKeyState::Held)
+		{
+			translate.x -= 1 * engine.time.deltaTime;
+		}
+		if (engine.Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_D) == nc::InputSystem::eKeyState::Held)
+		{
+			translate.x += 1 * engine.time.deltaTime;
+		}
+		if (engine.Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_W) == nc::InputSystem::eKeyState::Held)
+		{
+			translate.y += 1 * engine.time.deltaTime;
+		}
+		if (engine.Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_S) == nc::InputSystem::eKeyState::Held)
+		{
+			translate.y -= 1 * engine.time.deltaTime;
+		}
+
+		angle += engine.time.deltaTime;
+
+		glm::mat4 model{ 1.0f };
+		model = glm::translate(model, translate);
+		model = glm::rotate(model, angle, glm::vec3{ 0, 1, 0 });
+		model = glm::scale(model, glm::vec3{ 0.25f });
+		program->SetUniform("model", model);
 
 		engine.Get<nc::Renderer>()->BeginFrame();
 
 		vertexBuffer->Draw(GL_TRIANGLES);
-		
+
 		engine.Get<nc::Renderer>()->EndFrame();
 	}
 
