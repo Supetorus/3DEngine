@@ -10,3 +10,5 @@
 #include <glm/gtx/transform.hpp>
 #include <glm/gtx/color_space.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <glm/gtx/euler_angles.hpp>
+#include <glm/gtc/quaternion.hpp>

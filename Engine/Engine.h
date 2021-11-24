@@ -42,6 +42,8 @@
 // Components
 #include "Component/PhysicsComponent.h"
 #include "Component/AudioComponent.h"
+#include "Component/CameraComponent.h"
+#include "Component/MeshComponent.h"
 
 // Math
 #include "Math/MathTypes.h"

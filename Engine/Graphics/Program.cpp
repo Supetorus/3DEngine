@@ -41,7 +41,7 @@ namespace nc
 		if (status == GL_FALSE)
 		{
 			GLint length = 0;
-			glGetShaderiv(program, GL_INFO_LOG_LENGTH, &length);
+			glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length);
 
 			if (length > 0)
 			{
