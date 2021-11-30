@@ -66,7 +66,7 @@ int main(int argc, char** argv)
 	program->Use();
 
 	// Vertex Buffers
-	std::shared_ptr<nc::VertexIndexBuffer> vertexBuffer = engine.Get<nc::ResourceSystem>()->Get<nc::VertexIndexBuffer>("cube_mesh");
+	std::shared_ptr<nc::VertexBuffer> vertexBuffer = engine.Get<nc::ResourceSystem>()->Get<nc::VertexBuffer>("cube_mesh");
 	vertexBuffer->CreateVertexBuffer(sizeof(vertices), 8, (void*)vertices);
 	vertexBuffer->CreateIndexBuffer(GL_UNSIGNED_INT, 36, (void*)indices);
 	vertexBuffer->SetAttribute(0, 3, 8 * sizeof(float), 0);
@@ -111,7 +111,7 @@ int main(int argc, char** argv)
 
 		auto component = nc::ObjectFactory::Instance().Create<nc::MeshComponent>("MeshComponent");
 		component->program = engine.Get<nc::ResourceSystem>()->Get<nc::Program>("basic_shader");
-		component->vertexBuffer = engine.Get<nc::ResourceSystem>()->Get<nc::VertexIndexBuffer>("cube_mesh");
+		component->vertexBuffer = engine.Get<nc::ResourceSystem>()->Get<nc::VertexBuffer>("cube_mesh");
 
 		actor->AddComponent(std::move(component));
 		scene->AddActor(std::move(actor));

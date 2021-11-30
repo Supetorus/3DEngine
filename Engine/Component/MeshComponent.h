@@ -1,7 +1,7 @@
 #pragma once
 #include "GraphicsComponent.h"
 #include "Graphics/Material.h"
-#include "Graphics/VertexIndexBuffer.h"
+#include "Graphics/VertexBuffer.h"
 
 namespace nc
 {
@@ -17,7 +17,7 @@ namespace nc
 		virtual bool Read(const rapidjson::Value& value) override;
 
 	public:
-		std::shared_ptr<VertexIndexBuffer> vertexBuffer;
+		std::shared_ptr<VertexBuffer> vertexBuffer;
 		std::shared_ptr<Material> material;
 		std::shared_ptr<Program> program;
 	};
