@@ -89,10 +89,17 @@ int main(int argc, char** argv)
 		actor->name = "camera";
 		actor->transform.position = glm::vec3{ 0, 0, 10 };
 
-		auto component = nc::ObjectFactory::Instance().Create<nc::CameraComponent>("CameraComponent");
-		component->SetPerspective(45.0f, 800.0f / 600.0f, 0.01f, 100.0f);
-
-		actor->AddComponent(std::move(component));
+		{
+			auto component = nc::ObjectFactory::Instance().Create<nc::CameraComponent>("CameraComponent");
+			component->SetPerspective(45.0f, 800.0f / 600.0f, 0.01f, 100.0f);
+			actor->AddComponent(std::move(component));
+		}
+		{
+			auto component = nc::ObjectFactory::Instance().Create<nc::FreeCameraController>("FreeCameraController");
+			component->speed = 3;
+			component->sensitivity = 0.1f;
+			actor->AddComponent(std::move(component));
+		}
 		scene->AddActor(std::move(actor));
 	}
 
@@ -109,16 +116,6 @@ int main(int argc, char** argv)
 		actor->AddComponent(std::move(component));
 		scene->AddActor(std::move(actor));
 	}
-
-	// Uniform
-	//float time = 0;
-	//program->SetUniform("scale", time);
-	//glm::vec3 tint{ 1.0f, 1.0f, 1.0f };
-	//program->SetUniform("tint", tint);
-
-	//glm::mat4 view{ 1 };
-	//view = glm::lookAt(glm::vec3{ 0, 0, 4 }, { 0, 0, 0 }, { 0, 1, 0 });
-	//program->SetUniform("view", view);
 
 	glm::vec3 translate{ 0 };
 	float angle = 0;
@@ -145,19 +142,10 @@ int main(int argc, char** argv)
 		engine.Update();
 		scene->Update(engine.time.deltaTime);
 
-		// update actor
-		glm::vec3 direction{ 0 };
-		if (engine.Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_A) == nc::InputSystem::eKeyState::Held) direction.x = -1;
-		if (engine.Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_D) == nc::InputSystem::eKeyState::Held) direction.x = 1;
-		if (engine.Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_W) == nc::InputSystem::eKeyState::Held) direction.z = -1;
-		if (engine.Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_S) == nc::InputSystem::eKeyState::Held) direction.z = 1;
-		if (engine.Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_E) == nc::InputSystem::eKeyState::Held) direction.y = 1;
-		if (engine.Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_Q) == nc::InputSystem::eKeyState::Held) direction.y = -1;
-
+		// Update Actor
 		auto actor = scene->FindActor("cube");
 		if (actor != nullptr)
 		{
-			actor->transform.position += direction * 5.0f * engine.time.deltaTime;
 			actor->transform.rotation.y += engine.time.deltaTime;
 		}
 

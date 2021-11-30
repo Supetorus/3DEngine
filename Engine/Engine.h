@@ -45,6 +45,8 @@
 #include "Component/CameraComponent.h"
 #include "Component/MeshComponent.h"
 
+#include "Component/FreeCameraController.h"
+
 // Math
 #include "Math/MathTypes.h"
 

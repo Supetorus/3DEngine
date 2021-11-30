@@ -115,6 +115,9 @@
     <ClCompile Include="Component\MeshComponent.cpp">
       <Filter>Source\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Component\FreeCameraController.cpp">
+      <Filter>Source\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\EventSystem.h">
@@ -220,6 +223,9 @@
       <Filter>Source\Component</Filter>
     </ClInclude>
     <ClInclude Include="Component\MeshComponent.h">
+      <Filter>Source\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\FreeCameraController.h">
       <Filter>Source\Component</Filter>
     </ClInclude>
   </ItemGroup>
