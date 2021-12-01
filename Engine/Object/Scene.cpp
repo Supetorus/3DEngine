@@ -104,26 +104,6 @@ namespace nc
 		}
 	}
 
-	//glm::vec3 Scene::SafeLocation(float radius, float buffer)
-	//{
-	//	nc::glm::vec3 location;
-	//	bool invalidLocation = true;
-	//	while (invalidLocation)
-	//	{
-	//		location =
-	//		{
-	//			nc::RandomRange(0.0f, engine->Get<nc::Renderer>()->GetWidth() * 1.0f),
-	//			nc::RandomRange(0.0f, engine->Get<nc::Renderer>()->GetHeight() * 1.0f)
-	//		};
-	//		for (std::unique_ptr<Actor>& actor : actors)
-	//		{
-	//			if (glm::vec3::Distance(location, actor->transform.position) < radius + buffer + actor->GetRadius()) break;
-	//			invalidLocation = false;
-	//		}
-	//	}
-	//	return location;
-	//}
-
 	Actor* Scene::FindActor(const std::string& name)
 	{
 		for (auto& actor : actors)
