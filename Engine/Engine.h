@@ -1,6 +1,7 @@
 #pragma once
 
-#define REGISTER_CLASS(CLASS) nc::ObjectFactory::Instance().Register<CLASS>(#CLASS);
+#define CREATE_ENGINE_OBJECT(class) nc::ObjectFactory::Instance().Create<nc::class>(#class);
+#define REGISTER_CLASS(CLASS)       nc::ObjectFactory::Instance().Register<CLASS>(#CLASS);
 
 // Systems
 #include "Audio/AudioSystem.h"
