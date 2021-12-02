@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource\Shader">
+      <UniqueIdentifier>{be2da278-09af-4ae8-ab88-48dc997a9874}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Materials">
+      <UniqueIdentifier>{9aeefd3e-8f73-4db6-83e8-7f6b53febb37}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -24,16 +30,25 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Build\resources\shaders\basic.frag">
-      <Filter>Resource</Filter>
+      <Filter>Resource\Shader</Filter>
     </None>
     <None Include="..\Build\resources\shaders\basic.vert">
-      <Filter>Resource</Filter>
+      <Filter>Resource\Shader</Filter>
     </None>
     <None Include="..\Build\resources\shaders\light.frag">
-      <Filter>Resource</Filter>
+      <Filter>Resource\Shader</Filter>
     </None>
     <None Include="..\Build\resources\shaders\light.vert">
-      <Filter>Resource</Filter>
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="..\Build\resources\materials\spot.mtl">
+      <Filter>Resource\Materials</Filter>
+    </None>
+    <None Include="..\Build\resources\materials\wood.mtl">
+      <Filter>Resource\Materials</Filter>
+    </None>
+    <None Include="..\Build\resources\shaders\light.shdr">
+      <Filter>Resource\Shader</Filter>
     </None>
   </ItemGroup>
 </Project>
