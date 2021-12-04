@@ -3,16 +3,21 @@
 int main(int argc, char** argv)
 {
 	// Create Engine
-	nc::Engine engine;
-	engine.Startup();
-	engine.Get<nc::Renderer>()->Create("OpenGL", 800, 600);
+	std::unique_ptr<nc::Engine> engine = std::make_unique<nc::Engine>();
+	engine->Startup();
+	engine->Get<nc::Renderer>()->Create("OpenGL", 800, 600);
 
 	// Create Scene
 	std::unique_ptr<nc::Scene> scene = std::make_unique<nc::Scene>();
-	scene->engine = &engine;
+	scene->engine = engine.get();
 
 	nc::SeedRandom(static_cast<unsigned int>(time(nullptr)));
 	nc::SetFilePath("../resources");
+
+	// Load Scene
+	rapidjson::Document document;
+	bool success = nc::json::Load("scenes/main.scn", document);
+	scene->Read(document);
 
 	// Create Camera
 	{
@@ -41,8 +46,8 @@ int main(int argc, char** argv)
 		actor->transform.position = glm::vec3{ 0, 0, 0 };
 
 		auto component = CREATE_ENGINE_OBJECT(ModelComponent);
-		component->model = engine.Get<nc::ResourceSystem>()->Get<nc::Model>("models/cube.obj");
-		component->material = engine.Get<nc::ResourceSystem>()->Get<nc::Material>("materials/wood.mtl", &engine);
+		component->model = engine->Get<nc::ResourceSystem>()->Get<nc::Model>("models/cube.obj");
+		component->material = engine->Get<nc::ResourceSystem>()->Get<nc::Material>("materials/wood.mtl", &engine);
 
 		actor->AddComponent(std::move(component));
 		scene->AddActor(std::move(actor));
@@ -85,21 +90,21 @@ int main(int argc, char** argv)
 		}
 
 		SDL_PumpEvents();
-		engine.Update();
-		scene->Update(engine.time.deltaTime);
+		engine->Update();
+		scene->Update(engine->time.deltaTime);
 
 		// Update Actor
 		auto actor = scene->FindActor("model");
 		if (actor != nullptr)
 		{
-			actor->transform.rotation.y += engine.time.deltaTime;
+			actor->transform.rotation.y += engine->time.deltaTime;
 		}
 
-		engine.Get<nc::Renderer>()->BeginFrame();
+		engine->Get<nc::Renderer>()->BeginFrame();
 
 		scene->Draw(nullptr);
 
-		engine.Get<nc::Renderer>()->EndFrame();
+		engine->Get<nc::Renderer>()->EndFrame();
 	}
 
 	return 0;
