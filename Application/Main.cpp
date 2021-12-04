@@ -41,7 +41,7 @@ int main(int argc, char** argv)
 		actor->transform.position = glm::vec3{ 0, 0, 0 };
 
 		auto component = CREATE_ENGINE_OBJECT(ModelComponent);
-		component->model = engine.Get<nc::ResourceSystem>()->Get<nc::Model>("models/ogre.obj");
+		component->model = engine.Get<nc::ResourceSystem>()->Get<nc::Model>("models/cube.obj");
 		component->material = engine.Get<nc::ResourceSystem>()->Get<nc::Material>("materials/wood.mtl", &engine);
 
 		actor->AddComponent(std::move(component));
@@ -52,7 +52,7 @@ int main(int argc, char** argv)
 	{
 		auto actor = CREATE_ENGINE_OBJECT(Actor);
 		actor->name = "light";
-		actor->transform.position = glm::vec3{ 4 };
+		actor->transform.position = glm::vec3{ 4, 1, 4 };
 
 		auto component = CREATE_ENGINE_OBJECT(LightComponent);
 		component->ambient = glm::vec3{ 0.2f };

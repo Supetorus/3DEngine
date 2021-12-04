@@ -19,6 +19,9 @@
     <Filter Include="Resource\Materials">
       <UniqueIdentifier>{9aeefd3e-8f73-4db6-83e8-7f6b53febb37}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource\Scenes">
+      <UniqueIdentifier>{1417965a-1e9a-49d8-8daa-29b565c562a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -35,10 +38,10 @@
     <None Include="..\Build\resources\shaders\basic.vert">
       <Filter>Resource\Shader</Filter>
     </None>
-    <None Include="..\Build\resources\shaders\light.frag">
+    <None Include="..\Build\resources\shaders\gouraud.frag">
       <Filter>Resource\Shader</Filter>
     </None>
-    <None Include="..\Build\resources\shaders\light.vert">
+    <None Include="..\Build\resources\shaders\gouraud.vert">
       <Filter>Resource\Shader</Filter>
     </None>
     <None Include="..\Build\resources\materials\spot.mtl">
@@ -47,8 +50,29 @@
     <None Include="..\Build\resources\materials\wood.mtl">
       <Filter>Resource\Materials</Filter>
     </None>
-    <None Include="..\Build\resources\shaders\light.shdr">
+    <None Include="..\Build\resources\shaders\gouraud.shdr">
       <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="..\Build\resources\shaders\flat.frag">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="..\Build\resources\shaders\flat.shdr">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="..\Build\resources\shaders\flat.vert">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="..\Build\resources\shaders\phong.frag">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="..\Build\resources\shaders\phong.shdr">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="..\Build\resources\shaders\phong.vert">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="..\Build\resources\scenes\main.scn">
+      <Filter>Resource\Scenes</Filter>
     </None>
   </ItemGroup>
 </Project>
