@@ -32,9 +32,11 @@ namespace nc
 		std::vector<std::string> texture_names;
 		JSON_READ(document, texture_names);
 
+		GLuint units[] = { GL_TEXTURE0, GL_TEXTURE1, GL_TEXTURE2, GL_TEXTURE3, GL_TEXTURE4, GL_TEXTURE5 };
+		size_t i = 0;
 		for (auto& name : texture_names)
 		{
-			auto texture = engine->Get<ResourceSystem>()->Get<Texture>(name);
+			auto texture = engine->Get<ResourceSystem>()->Get<Texture>(name, (void*)units[i++]);
 			if (texture.get()) // check for valid texture
 			{
 				AddTexture(texture);

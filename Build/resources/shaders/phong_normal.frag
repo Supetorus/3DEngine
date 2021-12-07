@@ -28,7 +28,8 @@ uniform Material material;
 uniform Light light;
 
 uniform vec3 tint;
-uniform sampler2D color_sample;
+layout (binding = 0) uniform sampler2D color_sample;
+layout (binding = 1) uniform sampler2D normal_sample;
 
 void main()
 {
