@@ -4,7 +4,7 @@ in VS_OUT
 	vec3 fs_position;
 	vec3 fs_normal;
 	vec2 fs_texcoord;
-	mat3 tbn;
+	mat3 fs_tbn;
 } fs_in;
 
 out vec4 outColor;
