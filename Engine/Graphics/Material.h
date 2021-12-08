@@ -14,7 +14,6 @@ namespace nc
 		void AddTexture(const std::shared_ptr<Texture>& texture) { textures.push_back(texture); }
 
 	public:
-		glm::vec3 ambient = glm::vec3{ 0 };
 		glm::vec3 diffuse = glm::vec3{ 1 };
 		glm::vec3 specular = glm::vec3{ 1 };
 		float shininess = 100.0f;
