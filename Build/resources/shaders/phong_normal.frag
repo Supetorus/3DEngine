@@ -2,9 +2,10 @@
 in VS_OUT
 {
 	vec3 fs_position;
-	vec3 fs_normal;
+	vec3 fs_light_position;
 	vec2 fs_texcoord;
-	mat3 fs_tbn;
+//	vec3 fs_normal;
+//	mat3 fs_tbn;
 } fs_in;
 
 out vec4 outColor;
@@ -38,14 +39,14 @@ void main()
 	// convert rgb (0 <-> 1) to xyx (-1 <-> 1)
 	normal = normalize(normal * 2.0 - 1.0);
 	// transform normals to model view space
-	normal = normalize(fs_in.fs_tbn * normal);
+//	normal = normalize(fs_in.fs_tbn * normal);
 
 	// Ambient
 	vec3 ambient = light.ambient;
 
 	// Diffuse
 	// diffuse
-	vec3 light_dir = normalize(vec3(light.position) - fs_in.fs_position);
+	vec3 light_dir = normalize(vec3(fs_in.fs_light_position) - fs_in.fs_position);
 	float intensity = max(dot(light_dir, normal), 0);
 	vec3 diffuse = material.diffuse * light.diffuse * intensity;
 
