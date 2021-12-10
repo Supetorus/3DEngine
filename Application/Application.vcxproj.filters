@@ -98,5 +98,14 @@
     <None Include="..\Build\resources\shaders\effects.vert">
       <Filter>Resource\Shader</Filter>
     </None>
+    <None Include="..\Build\resources\materials\linguini.mtl">
+      <Filter>Resource\Materials</Filter>
+    </None>
+    <None Include="..\Build\resources\materials\penguin.mtl">
+      <Filter>Resource\Materials</Filter>
+    </None>
+    <None Include="..\Build\resources\materials\skull.mtl">
+      <Filter>Resource\Materials</Filter>
+    </None>
   </ItemGroup>
 </Project>

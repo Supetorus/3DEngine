@@ -54,12 +54,12 @@ void main()
 //	tposition = tposition * (noise(time + tposition.x * 3) + 1);
 
 //	Bloat
-	vec3 origin = vec3(0, 0.5, -0.35);
-	vec3 dir = tposition - origin;
-	float l = length(dir);
-	float a = (1.0 - (min(l, radius) / radius));
-	float f = mix(0.0, strength, a);
-	tposition = tposition + (normalize(dir) * f);
+//	vec3 origin = vec3(0, 0.5, -0.35);
+//	vec3 dir = tposition - origin;
+//	float l = length(dir);
+//	float a = (1.0 - (min(l, radius) / radius));
+//	float f = mix(0.0, strength, a);
+//	tposition = tposition + (normalize(dir) * f);
 
 	vs_out.normal = normalize(normal_matrix * normal);
 	vs_out.position = vec3(model_view * vec4(tposition, 1));

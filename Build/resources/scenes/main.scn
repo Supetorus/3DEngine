@@ -15,8 +15,8 @@
 			"components": [
 				{
 					"type": "ModelComponent",
-					"model_name": "models/spot.obj",
-					"material_name": "materials/spot.mtl"
+					"model_name": "models/skull.OBJ",
+					"material_name": "materials/skull.mtl"
 				}
 			]
 		},

@@ -67,16 +67,16 @@ int main(int argc, char** argv)
 		}
 
 		// Update Shader
-		//auto shader = engine->Get<nc::ResourceSystem>()->Get<nc::Program>("shaders/effects.shdr");
-		//if (shader)
-		//{
-		//	shader->Use();
-		//	shader->SetUniform("time", time);
-		//	shader->SetUniform("uv.tiling", glm::vec2{ 3 });
-		//	shader->SetUniform("uv.offset", glm::vec2{ 0, time });
-		//	shader->SetUniform("strength", (std::sin(time * 4) + 1.0f) * 0.5f);
-		//	shader->SetUniform("radius", 0.5f);
-		//}
+		auto shader = engine->Get<nc::ResourceSystem>()->Get<nc::Program>("shaders/effects.shdr");
+		if (shader)
+		{
+			shader->Use();
+			shader->SetUniform("time", time);
+			shader->SetUniform("uv.tiling", glm::vec2{ 3 });
+			//shader->SetUniform("uv.offset", glm::vec2{ 0, time });
+			shader->SetUniform("strength", (std::sin(time * 4) + 1.0f) * 0.5f);
+			shader->SetUniform("radius", 0.5f);
+		}
 
 		engine->Get<nc::Renderer>()->BeginFrame();
 
